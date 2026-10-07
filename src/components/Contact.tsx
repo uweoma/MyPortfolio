@@ -3,7 +3,7 @@
 import { useState, type ComponentType, type SVGProps } from "react";
 import { Mail, Send } from "lucide-react";
 import { contact } from "@/config/site";
-import { cn, isConfigured } from "@/lib/utils";
+import { cn, gmailComposeUrl, isConfigured } from "@/lib/utils";
 import { Button } from "./ui/Button";
 import { GithubIcon, LinkedinIcon } from "./icons";
 import { Section } from "./Section";
@@ -71,10 +71,12 @@ export function Contact() {
     if (!emailReady) return;
     const subject = `Portfolio enquiry from ${form.name || "someone"}`;
     const body = `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`;
-    // Opens the visitor's own email client — no fake backend involved.
-    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    // Opens Gmail's compose window in a new tab, pre-addressed to you.
+    window.open(
+      gmailComposeUrl(contact.email, subject, body),
+      "_blank",
+      "noopener,noreferrer",
+    );
   }
 
   const fieldClasses =
@@ -94,7 +96,8 @@ export function Contact() {
               icon={Mail}
               label="Email"
               value={emailReady ? contact.email : "Add your email in src/config/site.ts"}
-              href={emailReady ? `mailto:${contact.email}` : undefined}
+              href={emailReady ? gmailComposeUrl(contact.email) : undefined}
+              external
             />
             <ContactMethod
               icon={GithubIcon}
@@ -168,7 +171,7 @@ export function Contact() {
 
           <p className="text-xs text-faint">
             {emailReady
-              ? "This opens your email client with the message pre-filled."
+              ? "This opens Gmail in a new tab with your message pre-filled."
               : "Set your email in src/config/site.ts to enable the form."}
           </p>
         </form>

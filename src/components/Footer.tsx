@@ -1,6 +1,6 @@
 import { Mail, type LucideIcon } from "lucide-react";
 import { contact } from "@/config/site";
-import { isConfigured } from "@/lib/utils";
+import { isConfigured, gmailComposeUrl } from "@/lib/utils";
 import { GithubIcon, LinkedinIcon } from "./icons";
 
 type IconType = LucideIcon | typeof GithubIcon;
@@ -63,7 +63,8 @@ export function Footer() {
           <FooterLink
             icon={Mail}
             label="Email"
-            href={isConfigured(contact.email) ? `mailto:${contact.email}` : undefined}
+            href={isConfigured(contact.email) ? gmailComposeUrl(contact.email) : undefined}
+            external
           />
         </ul>
       </div>
