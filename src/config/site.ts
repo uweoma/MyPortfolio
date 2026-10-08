@@ -36,7 +36,7 @@ export const siteConfig = {
  */
 export const contact = {
   email: "uweomaadewale@gmail.com", // e.g. "uweoma@example.com"
-  linkedin: "https://www.linkedin.com/in/uweoma-okpor-417878305?utm_source=share_via&utm_content=profile&utm_medium=member_android", // e.g. "https://www.linkedin.com/in/your-handle"
+  linkedin: "https://www.linkedin.com/in/uweoma-okpor-417878305", // e.g. "https://www.linkedin.com/in/your-handle"
   github: "https://github.com/uweoma",
 } as const;
 
